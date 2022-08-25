@@ -10,7 +10,7 @@
     <string name="product_name">Title</string>
     <string name="product_price">Description</string>
     <string name="delete">Delete</string>
-    <string name="loading">Loading...</string>
+    <string name="loading">Loading…</string>
     <string name="save">Save</string>
     <string name="MustHaveTitle">Note must have a title</string>
 </resources>

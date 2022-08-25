@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">To Do List - Eldorado</string>
+    <string name="add">Add</string>
+    <string name="update">Update</string>
+    <string name="ProdUpSuc">Item was successfully updated</string>
+    <string name="ProdAddSuc">Item was successfully added</string>
+    <string name="ProdDelSuc">Item was successfully deleted</string>
+    <string name="Title">Title</string>
+    <string name="Description">Description</string>
+    <string name="product_name">Title</string>
+    <string name="product_price">Description</string>
+    <string name="delete">Delete</string>
+    <string name="loading">Loading...</string>
+    <string name="save">Save</string>
+    <string name="MustHaveTitle">Note must have a title</string>
+</resources>

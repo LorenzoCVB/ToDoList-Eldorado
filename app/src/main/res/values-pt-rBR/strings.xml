@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Lista de Afazeres - Eldorado</string>
+    <string name="add">Adicionar</string>
+    <string name="update">Atualizar</string>
+    <string name="ProdUpSuc">Item atualizado com sucesso</string>
+    <string name="ProdAddSuc">Item adicionado com sucesso</string>
+    <string name="ProdDelSuc">Item deletado com sucesso</string>
+    <string name="Title">Titulo</string>
+    <string name="Description">Descrição</string>
+    <string name="product_name">Título</string>
+    <string name="product_price">Descrição</string>
+    <string name="delete">Deletar</string>
+    <string name="save">Salvar</string>
+    <string name="loading">Carregando</string>
+    <string name="MustHaveTitle">A nota deve ter um título</string>
+</resources>

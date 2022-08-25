@@ -65,17 +65,8 @@ class MainActivity : AppCompatActivity(), CountInterface, ClickInterface, Delete
         menuInflater.inflate(R.menu.menu_item, menu)
     }
 
-
-    //menu pra deletar
-//    override fun onContextItemSelected(item: MenuItem): Boolean {
-//        when (item.itemId) {
-//            R.id.deleteItem -> Toast.makeText(this, "hehehehe", Toast.LENGTH_LONG).show()
-//        }
-//        return super.onContextItemSelected(item)
-//    }
-
     override fun onCount(count: Int) {
-        //textView3.setText(count.toString())
+
     }
 
     override fun onClick(productModel: ProductModel) {

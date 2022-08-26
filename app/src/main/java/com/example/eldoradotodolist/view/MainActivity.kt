@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.view.ContextMenu
 import android.view.View
+import android.widget.CheckBox
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
@@ -17,6 +18,7 @@ import com.example.eldoradotodolist.adapter.ProductAdapter
 import com.example.eldoradotodolist.model.ProductModel
 import com.example.eldoradotodolist.view_model.ProductViewModel
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.product_list.*
 
 class MainActivity : AppCompatActivity(), CountInterface, ClickInterface, DeleteInterface {
 
@@ -49,10 +51,21 @@ class MainActivity : AppCompatActivity(), CountInterface, ClickInterface, Delete
             }
         }
 
+        fun onCheckboxClicked(view: View){
+            if(view is CheckBox){
+                val checked: Boolean = view.isChecked
+            }
+        }
+
+
+
+
         floatingActionButton.setOnClickListener {
             val intent = Intent(this, AddEditActivity::class.java)
             startActivity(intent)
         }
+
+
 
     }
 

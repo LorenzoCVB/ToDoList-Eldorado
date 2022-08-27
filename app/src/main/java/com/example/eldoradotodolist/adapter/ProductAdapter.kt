@@ -26,6 +26,10 @@ class ProductAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
+        if (productList.isEmpty()){
+
+        }
+
         holder.productName.text = productList[position].productName
         holder.productPrice.text = productList[position].productPrice
 

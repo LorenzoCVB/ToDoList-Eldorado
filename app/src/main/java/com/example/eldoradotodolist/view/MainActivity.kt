@@ -8,6 +8,7 @@ import android.view.View
 import android.widget.CheckBox
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isEmpty
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.eldoradotodolist.R
@@ -18,7 +19,6 @@ import com.example.eldoradotodolist.adapter.ProductAdapter
 import com.example.eldoradotodolist.model.ProductModel
 import com.example.eldoradotodolist.view_model.ProductViewModel
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.product_list.*
 
 class MainActivity : AppCompatActivity(), CountInterface, ClickInterface, DeleteInterface {
 
@@ -27,6 +27,7 @@ class MainActivity : AppCompatActivity(), CountInterface, ClickInterface, Delete
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
 
         val loading = LoadingDialog(this)
         loading.startLoading()
@@ -42,17 +43,25 @@ class MainActivity : AppCompatActivity(), CountInterface, ClickInterface, Delete
         val productAdapter = ProductAdapter(this, this, this)
         recyclerView.adapter = productAdapter
 
+
+
+
         productViewModel = ViewModelProvider(
             this, ViewModelProvider.AndroidViewModelFactory.getInstance(application)
         )[ProductViewModel::class.java]
         productViewModel.getAllProductList.observe(this) { list ->
             list?.let {
                 productAdapter.updateList(it)
+                if(recyclerView.isEmpty()){
+                    Toast.makeText(this, "No records to show!", Toast.LENGTH_SHORT).show()
+                }
             }
         }
 
-        fun onCheckboxClicked(view: View){
-            if(view is CheckBox){
+
+
+        fun onCheckboxClicked(view: View) {
+            if (view is CheckBox) {
                 val checked: Boolean = view.isChecked
             }
         }
@@ -64,7 +73,6 @@ class MainActivity : AppCompatActivity(), CountInterface, ClickInterface, Delete
             val intent = Intent(this, AddEditActivity::class.java)
             startActivity(intent)
         }
-
 
 
     }

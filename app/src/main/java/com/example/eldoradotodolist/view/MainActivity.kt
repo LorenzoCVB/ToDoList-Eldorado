@@ -8,9 +8,6 @@ import android.view.View
 import android.widget.CheckBox
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.isEmpty
-import androidx.core.view.isNotEmpty
-import androidx.core.view.size
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.eldoradotodolist.R
@@ -53,10 +50,8 @@ class MainActivity : AppCompatActivity(), CountInterface, ClickInterface, Delete
             list?.let {
                 productAdapter.updateList(it)
                 if(it.isEmpty()){
-                    Toast.makeText(this, "aloaloaloalaoalaoalao", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, getString(R.string.EmptyList), Toast.LENGTH_SHORT).show()
                 }
-
-
             }
         }
 
@@ -75,21 +70,15 @@ class MainActivity : AppCompatActivity(), CountInterface, ClickInterface, Delete
             val intent = Intent(this, AddEditActivity::class.java)
             startActivity(intent)
         }
-
-
     }
 
-    override fun onCreateContextMenu(
-        menu: ContextMenu?,
-        v: View?,
-        menuInfo: ContextMenu.ContextMenuInfo?
-    ) {
+    override fun onCreateContextMenu(menu: ContextMenu?, v: View?, menuInfo: ContextMenu.ContextMenuInfo?){
         super.onCreateContextMenu(menu, v, menuInfo)
         menuInflater.inflate(R.menu.menu_item, menu)
     }
 
     override fun onCount(count: Int) {
-
+        //nada por enquanto
     }
 
     override fun onClick(productModel: ProductModel) {

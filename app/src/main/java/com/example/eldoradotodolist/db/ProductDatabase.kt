@@ -16,7 +16,7 @@ abstract class ProductDatabase : RoomDatabase(){
 
         fun getDatabase(context: Context):ProductDatabase{
             return INSTANCE?: synchronized(this){
-                var instance = Room.databaseBuilder(
+                val instance = Room.databaseBuilder(
                     context.applicationContext,
                     ProductDatabase::class.java,
                     "product_database"

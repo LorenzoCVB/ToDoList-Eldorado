@@ -9,6 +9,8 @@ import android.widget.CheckBox
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isEmpty
+import androidx.core.view.isNotEmpty
+import androidx.core.view.size
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.eldoradotodolist.R
@@ -44,17 +46,17 @@ class MainActivity : AppCompatActivity(), CountInterface, ClickInterface, Delete
         recyclerView.adapter = productAdapter
 
 
-
-
         productViewModel = ViewModelProvider(
             this, ViewModelProvider.AndroidViewModelFactory.getInstance(application)
         )[ProductViewModel::class.java]
         productViewModel.getAllProductList.observe(this) { list ->
             list?.let {
                 productAdapter.updateList(it)
-                if(recyclerView.isEmpty()){
-                    Toast.makeText(this, "No records to show!", Toast.LENGTH_SHORT).show()
+                if(it.isEmpty()){
+                    Toast.makeText(this, "aloaloaloalaoalaoalao", Toast.LENGTH_SHORT).show()
                 }
+
+
             }
         }
 
@@ -101,6 +103,8 @@ class MainActivity : AppCompatActivity(), CountInterface, ClickInterface, Delete
 
     override fun onDelete(productModel: ProductModel) {
         productViewModel.deleteProduct(productModel)
-        Toast.makeText(this, (getString(R.string.ProdDelSuc)), Toast.LENGTH_LONG).show()
+        Toast.makeText(this, (getString(R.string.ProdDelSuc)), Toast.LENGTH_SHORT).show()
     }
+
+
 }

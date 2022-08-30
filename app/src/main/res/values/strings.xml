@@ -5,6 +5,7 @@
     <string name="ProdUpSuc">Item was successfully updated</string>
     <string name="ProdAddSuc">Item was successfully added</string>
     <string name="ProdDelSuc">Item was successfully deleted</string>
+    <string name="EmptyList">Please add an item to your list</string>
     <string name="Title">Title</string>
     <string name="Description">Description</string>
     <string name="product_name">Title</string>

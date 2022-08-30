@@ -1,14 +1,13 @@
 package com.example.eldoradotodolist.adapter
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.eldoradotodolist.R
 import com.example.eldoradotodolist.model.ProductModel
 import kotlinx.android.synthetic.main.product_list.view.*
-
 
 
 class ProductAdapter(
@@ -18,23 +17,31 @@ class ProductAdapter(
 
     val productList = ArrayList<ProductModel>()
 
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.product_list, parent, false)
+
+
+        //Toast.makeText(view.context, productList.size.toString(), Toast.LENGTH_SHORT).show()
+
+
         return ViewHolder(view)
+
+
     }
+
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
-        if (productList.isEmpty()){
-
-        }
 
         holder.productName.text = productList[position].productName
         holder.productPrice.text = productList[position].productPrice
 
         holder.itemView.setOnLongClickListener {
             deleteInterface.onDelete(productList[position])
+            if (productList.size == 1) {
+                Toast.makeText(holder.itemView.context, R.string.EmptyList, Toast.LENGTH_SHORT)
+                    .show()
+            }
             return@setOnLongClickListener true
         }
 

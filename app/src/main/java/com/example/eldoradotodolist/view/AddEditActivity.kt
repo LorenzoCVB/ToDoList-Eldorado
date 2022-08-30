@@ -6,11 +6,13 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.size
 import androidx.lifecycle.ViewModelProvider
 import com.example.eldoradotodolist.R
 import com.example.eldoradotodolist.model.ProductModel
 import com.example.eldoradotodolist.view_model.ProductViewModel
 import kotlinx.android.synthetic.main.activity_add_edit.*
+import kotlinx.android.synthetic.main.activity_main.*
 
 class AddEditActivity : AppCompatActivity() {
 
@@ -49,14 +51,14 @@ class AddEditActivity : AppCompatActivity() {
             savebutton.setOnClickListener {
 
                 if (TextUtils.isEmpty(inputText.text.toString())) {
-                    Toast.makeText(this, (getString(R.string.MustHaveTitle)), Toast.LENGTH_LONG)
+                    Toast.makeText(this, (getString(R.string.MustHaveTitle)), Toast.LENGTH_SHORT)
                         .show()
                 } else {
                     val product =
                         ProductModel(editTitle.text.toString(), Description.text.toString())
                     product.id = productId
                     productViewModel.productUpdate(product)
-                    Toast.makeText(this, (getString(R.string.ProdUpSuc)), Toast.LENGTH_LONG).show()
+                    Toast.makeText(this, (getString(R.string.ProdUpSuc)), Toast.LENGTH_SHORT).show()
                     finish()
                 }
 
@@ -67,7 +69,7 @@ class AddEditActivity : AppCompatActivity() {
             savebutton.setOnClickListener {
 
                 if (TextUtils.isEmpty(inputText.text.toString())) {
-                    Toast.makeText(this, (getString(R.string.MustHaveTitle)), Toast.LENGTH_LONG)
+                    Toast.makeText(this, (getString(R.string.MustHaveTitle)), Toast.LENGTH_SHORT)
                         .show()
                 } else {
                     productViewModel.productInsert(
@@ -76,7 +78,7 @@ class AddEditActivity : AppCompatActivity() {
                             Description.text.toString()
                         )
                     )
-                    Toast.makeText(this, (getString(R.string.ProdAddSuc)), Toast.LENGTH_LONG).show()
+                    Toast.makeText(this, (getString(R.string.ProdAddSuc)), Toast.LENGTH_SHORT).show()
                     finish()
                 }
 

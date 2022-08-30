@@ -48,7 +48,7 @@ class AddEditActivity : AppCompatActivity() {
 
             savebutton.setOnClickListener {
 
-                if (TextUtils.isEmpty(inputText.getText().toString())) {
+                if (TextUtils.isEmpty(inputText.text.toString())) {
                     Toast.makeText(this, (getString(R.string.MustHaveTitle)), Toast.LENGTH_LONG)
                         .show()
                 } else {
@@ -66,7 +66,7 @@ class AddEditActivity : AppCompatActivity() {
             savebutton.text = getString(R.string.add)
             savebutton.setOnClickListener {
 
-                if (TextUtils.isEmpty(inputText.getText().toString())) {
+                if (TextUtils.isEmpty(inputText.text.toString())) {
                     Toast.makeText(this, (getString(R.string.MustHaveTitle)), Toast.LENGTH_LONG)
                         .show()
                 } else {

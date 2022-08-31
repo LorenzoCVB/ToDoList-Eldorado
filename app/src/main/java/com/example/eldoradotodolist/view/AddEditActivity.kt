@@ -17,11 +17,11 @@ import java.time.format.DateTimeFormatter
 class AddEditActivity : AppCompatActivity() {
 
 
-    lateinit var inputText: EditText
-    lateinit var saveButton: Button
+    private lateinit var inputText: EditText
+    private lateinit var saveButton: Button
 
-    lateinit var productViewModel: ProductViewModel
-    var productId = -1
+    private lateinit var productViewModel: ProductViewModel
+    private var productId = -1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,7 +36,7 @@ class AddEditActivity : AppCompatActivity() {
         val formatted = current.format(formatter)
 
 
-        productViewModel = ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory.getInstance(application)).get(ProductViewModel::class.java)
+        productViewModel = ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory.getInstance(application))[ProductViewModel::class.java]
 
         val type = intent.getStringExtra("type")
         if (type.equals("Edit")) {

@@ -4,7 +4,7 @@ import android.app.Activity
 import android.app.AlertDialog
 import com.example.eldoradotodolist.R
 
-class LoadingDialog(val mActivity: Activity) {
+class LoadingDialog(private val mActivity: Activity) {
     private lateinit var isdialog: AlertDialog
     fun startLoading() {
 

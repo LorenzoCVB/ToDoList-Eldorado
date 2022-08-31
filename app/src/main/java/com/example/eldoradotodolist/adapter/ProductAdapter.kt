@@ -1,17 +1,19 @@
 package com.example.eldoradotodolist.adapter
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.eldoradotodolist.R
 import com.example.eldoradotodolist.model.ProductModel
 import kotlinx.android.synthetic.main.product_list.view.*
 
-class ProductAdapter(val clickInterface: ClickInterface, val deleteInterface: DeleteInterface) : RecyclerView.Adapter<ProductAdapter.ViewHolder>() {
+class ProductAdapter(private val clickInterface: ClickInterface, private val deleteInterface: DeleteInterface) : RecyclerView.Adapter<ProductAdapter.ViewHolder>() {
 
-    val productList = ArrayList<ProductModel>()
+    private val productList = ArrayList<ProductModel>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.product_list, parent, false)
@@ -45,12 +47,13 @@ class ProductAdapter(val clickInterface: ClickInterface, val deleteInterface: De
     }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val productName = itemView.textView
-        val productPrice = itemView.textView2
-        val productDate = itemView.id_date
+        val productName: TextView = itemView.textView
+        val productPrice: TextView = itemView.textView2
+        val productDate: TextView = itemView.id_date
 
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     fun updateList(myList: List<ProductModel>) {
         productList.clear()
         productList.addAll(myList)

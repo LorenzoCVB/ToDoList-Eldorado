@@ -12,7 +12,7 @@ import kotlinx.coroutines.launch
 class ProductViewModel(application: Application): AndroidViewModel(application) {
 
     val getAllProductList:LiveData<List<ProductModel>>
-    val productRepository:ProductRepository
+    private val productRepository:ProductRepository
 
     init {
         val dao = ProductDatabase.getDatabase(application).getProductDao()

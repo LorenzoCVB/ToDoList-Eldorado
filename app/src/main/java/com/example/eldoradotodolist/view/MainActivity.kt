@@ -17,7 +17,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), ClickInterface, DeleteInterface {
 
-    lateinit var productViewModel: ProductViewModel
+    private lateinit var productViewModel: ProductViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,18 +28,14 @@ class MainActivity : AppCompatActivity(), ClickInterface, DeleteInterface {
         loading.startLoading()
 
         val handler = Handler()
-        handler.postDelayed(object : Runnable {
-            override fun run() {
-                loading.isDismiss()
-            }
-        }, 2000)
+        handler.postDelayed({ loading.isDismiss() }, 2000)
 
         recyclerView.layoutManager = LinearLayoutManager(this)
         val productAdapter = ProductAdapter(this, this/*, this*/)
         recyclerView.adapter = productAdapter
 
 
-        productViewModel = ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory.getInstance(application)).get(ProductViewModel::class.java)
+        productViewModel = ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory.getInstance(application))[ProductViewModel::class.java]
         productViewModel.getAllProductList.observe(this) { list ->
             list?.let {
                 productAdapter.updateList(it)

@@ -6,7 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.eldoradotodolist.model.ProductModel
 
-@Database(entities = arrayOf(ProductModel::class), version = 1, exportSchema = false)
+@Database(entities = [ProductModel::class], version = 1, exportSchema = false)
 abstract class ProductDatabase : RoomDatabase(){
 
     abstract fun getProductDao():ProductDao

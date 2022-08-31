@@ -14,4 +14,5 @@
     <string name="loading">Loading…</string>
     <string name="save">Save</string>
     <string name="MustHaveTitle">Note must have a title</string>
+    <string name="DataView">Missing Date</string>
 </resources>

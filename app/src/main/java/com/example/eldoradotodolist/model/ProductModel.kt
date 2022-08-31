@@ -9,7 +9,11 @@ class ProductModel(
     @ColumnInfo(name = "productName")
     val productName:String,
     @ColumnInfo(name = "productPrice")
-    val productPrice:String
+    val productPrice:String,
+
+    //adicionei uma nova coluna
+    @ColumnInfo(name="product_date")
+    val product_date:String
 ) {
     @PrimaryKey(autoGenerate = true)
     var id = 0

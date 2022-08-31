@@ -55,17 +55,6 @@ class MainActivity : AppCompatActivity(), CountInterface, ClickInterface, Delete
             }
         }
 
-
-
-        fun onCheckboxClicked(view: View) {
-            if (view is CheckBox) {
-                val checked: Boolean = view.isChecked
-            }
-        }
-
-
-
-
         floatingActionButton.setOnClickListener {
             val intent = Intent(this, AddEditActivity::class.java)
             startActivity(intent)

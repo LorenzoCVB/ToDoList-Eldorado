@@ -9,32 +9,21 @@ import com.example.eldoradotodolist.R
 import com.example.eldoradotodolist.model.ProductModel
 import kotlinx.android.synthetic.main.product_list.view.*
 
-
-class ProductAdapter(
-    val countInterface: CountInterface, val clickInterface: ClickInterface,
-    val deleteInterface: DeleteInterface
-) : RecyclerView.Adapter<ProductAdapter.ViewHolder>() {
+class ProductAdapter(val countInterface: CountInterface, val clickInterface: ClickInterface, val deleteInterface: DeleteInterface) : RecyclerView.Adapter<ProductAdapter.ViewHolder>() {
 
     val productList = ArrayList<ProductModel>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.product_list, parent, false)
-
-
-        //Toast.makeText(view.context, productList.size.toString(), Toast.LENGTH_SHORT).show()
-
-
         return ViewHolder(view)
-
-
     }
 
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
-
         holder.productName.text = productList[position].productName
         holder.productPrice.text = productList[position].productPrice
+        holder.productDate.text = productList[position].product_date
 
         holder.itemView.setOnLongClickListener {
             deleteInterface.onDelete(productList[position])
@@ -60,6 +49,7 @@ class ProductAdapter(
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val productName = itemView.textView
         val productPrice = itemView.textView2
+        val productDate = itemView.id_date
 
     }
 

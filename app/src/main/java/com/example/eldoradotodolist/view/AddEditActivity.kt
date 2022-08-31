@@ -6,15 +6,16 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.size
 import androidx.lifecycle.ViewModelProvider
 import com.example.eldoradotodolist.R
 import com.example.eldoradotodolist.model.ProductModel
 import com.example.eldoradotodolist.view_model.ProductViewModel
 import kotlinx.android.synthetic.main.activity_add_edit.*
-import kotlinx.android.synthetic.main.activity_main.*
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 class AddEditActivity : AppCompatActivity() {
+
 
     lateinit var inputText: EditText
     lateinit var saveButton: Button
@@ -30,6 +31,9 @@ class AddEditActivity : AppCompatActivity() {
         saveButton = findViewById(R.id.savebutton)
 
 
+        val current = LocalDateTime.now()
+        val formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy")
+        val formatted = current.format(formatter)
 
 
         productViewModel = ViewModelProvider(
@@ -42,9 +46,13 @@ class AddEditActivity : AppCompatActivity() {
             productId = intent.getIntExtra("productId", -1)
             val productName = intent.getStringExtra("productName")
             val productPrice = intent.getStringExtra("productPrice")
+            //val product_date = intent.getStringExtra("product_date")
 
             editTitle.setText(productName)
             Description.setText(productPrice)
+
+
+
 
             savebutton.text = getString(R.string.update)
 
@@ -54,8 +62,11 @@ class AddEditActivity : AppCompatActivity() {
                     Toast.makeText(this, (getString(R.string.MustHaveTitle)), Toast.LENGTH_SHORT)
                         .show()
                 } else {
+
+
+
                     val product =
-                        ProductModel(editTitle.text.toString(), Description.text.toString())
+                        ProductModel(editTitle.text.toString(), Description.text.toString(), formatted)
                     product.id = productId
                     productViewModel.productUpdate(product)
                     Toast.makeText(this, (getString(R.string.ProdUpSuc)), Toast.LENGTH_SHORT).show()
@@ -75,7 +86,9 @@ class AddEditActivity : AppCompatActivity() {
                     productViewModel.productInsert(
                         ProductModel(
                             editTitle.text.toString(),
-                            Description.text.toString()
+                            Description.text.toString(),
+                            formatted
+
                         )
                     )
                     Toast.makeText(this, (getString(R.string.ProdAddSuc)), Toast.LENGTH_SHORT).show()

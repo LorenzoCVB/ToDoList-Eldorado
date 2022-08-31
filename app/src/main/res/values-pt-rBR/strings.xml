@@ -14,5 +14,6 @@
     <string name="save">Salvar</string>
     <string name="loading">Carregando</string>
     <string name="MustHaveTitle">A nota deve ter um título</string>
-    <string name="EmptyList">Por favor, adicione algo á sua lista</string>
+    <string name="EmptyList">Por favor, adicione algo à sua lista</string>
+    <string name="DataView">Missing Date</string>
 </resources>

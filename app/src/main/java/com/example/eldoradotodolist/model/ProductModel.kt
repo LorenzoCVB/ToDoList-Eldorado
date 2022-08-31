@@ -10,8 +10,6 @@ class ProductModel(
     val productName:String,
     @ColumnInfo(name = "productPrice")
     val productPrice:String,
-
-    //adicionei uma nova coluna
     @ColumnInfo(name="product_date")
     val product_date:String
 ) {

@@ -9,7 +9,7 @@ import com.example.eldoradotodolist.R
 import com.example.eldoradotodolist.model.ProductModel
 import kotlinx.android.synthetic.main.product_list.view.*
 
-class ProductAdapter(val countInterface: CountInterface, val clickInterface: ClickInterface, val deleteInterface: DeleteInterface) : RecyclerView.Adapter<ProductAdapter.ViewHolder>() {
+class ProductAdapter(val clickInterface: ClickInterface, val deleteInterface: DeleteInterface) : RecyclerView.Adapter<ProductAdapter.ViewHolder>() {
 
     val productList = ArrayList<ProductModel>()
 
@@ -37,8 +37,6 @@ class ProductAdapter(val countInterface: CountInterface, val clickInterface: Cli
         holder.itemView.setOnClickListener {
             clickInterface.onClick(productList[position])
         }
-
-
     }
 
 
@@ -60,9 +58,6 @@ class ProductAdapter(val countInterface: CountInterface, val clickInterface: Cli
     }
 }
 
-interface CountInterface {
-    fun onCount(count: Int)
-}
 
 interface ClickInterface {
     fun onClick(productModel: ProductModel)

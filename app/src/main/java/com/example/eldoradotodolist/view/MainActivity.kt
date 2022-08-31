@@ -3,23 +3,19 @@ package com.example.eldoradotodolist.view
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
-import android.view.ContextMenu
-import android.view.View
-import android.widget.CheckBox
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.eldoradotodolist.R
 import com.example.eldoradotodolist.adapter.ClickInterface
-import com.example.eldoradotodolist.adapter.CountInterface
 import com.example.eldoradotodolist.adapter.DeleteInterface
 import com.example.eldoradotodolist.adapter.ProductAdapter
 import com.example.eldoradotodolist.model.ProductModel
 import com.example.eldoradotodolist.view_model.ProductViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity(), CountInterface, ClickInterface, DeleteInterface {
+class MainActivity : AppCompatActivity(), ClickInterface, DeleteInterface {
 
     lateinit var productViewModel: ProductViewModel
 
@@ -39,13 +35,11 @@ class MainActivity : AppCompatActivity(), CountInterface, ClickInterface, Delete
         }, 2000)
 
         recyclerView.layoutManager = LinearLayoutManager(this)
-        val productAdapter = ProductAdapter(this, this, this)
+        val productAdapter = ProductAdapter(this, this/*, this*/)
         recyclerView.adapter = productAdapter
 
 
-        productViewModel = ViewModelProvider(
-            this, ViewModelProvider.AndroidViewModelFactory.getInstance(application)
-        )[ProductViewModel::class.java]
+        productViewModel = ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory.getInstance(application)).get(ProductViewModel::class.java)
         productViewModel.getAllProductList.observe(this) { list ->
             list?.let {
                 productAdapter.updateList(it)
@@ -61,15 +55,6 @@ class MainActivity : AppCompatActivity(), CountInterface, ClickInterface, Delete
         }
     }
 
-    override fun onCreateContextMenu(menu: ContextMenu?, v: View?, menuInfo: ContextMenu.ContextMenuInfo?){
-        super.onCreateContextMenu(menu, v, menuInfo)
-        menuInflater.inflate(R.menu.menu_item, menu)
-    }
-
-    override fun onCount(count: Int) {
-        //nada
-    }
-
     override fun onClick(productModel: ProductModel) {
         val intent = Intent(this, AddEditActivity::class.java)
         intent.putExtra("type", "Edit")
@@ -83,6 +68,4 @@ class MainActivity : AppCompatActivity(), CountInterface, ClickInterface, Delete
         productViewModel.deleteProduct(productModel)
         Toast.makeText(this, (getString(R.string.ProdDelSuc)), Toast.LENGTH_SHORT).show()
     }
-
-
 }

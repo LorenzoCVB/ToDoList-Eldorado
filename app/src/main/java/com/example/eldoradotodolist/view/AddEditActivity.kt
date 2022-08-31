@@ -36,69 +36,42 @@ class AddEditActivity : AppCompatActivity() {
         val formatted = current.format(formatter)
 
 
-        productViewModel = ViewModelProvider(
-            this,
-            ViewModelProvider.AndroidViewModelFactory.getInstance(application)
-        ).get(ProductViewModel::class.java)
+        productViewModel = ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory.getInstance(application)).get(ProductViewModel::class.java)
 
         val type = intent.getStringExtra("type")
         if (type.equals("Edit")) {
             productId = intent.getIntExtra("productId", -1)
             val productName = intent.getStringExtra("productName")
             val productPrice = intent.getStringExtra("productPrice")
-            //val product_date = intent.getStringExtra("product_date")
 
             editTitle.setText(productName)
             Description.setText(productPrice)
 
 
-
-
             savebutton.text = getString(R.string.update)
-
             savebutton.setOnClickListener {
-
                 if (TextUtils.isEmpty(inputText.text.toString())) {
-                    Toast.makeText(this, (getString(R.string.MustHaveTitle)), Toast.LENGTH_SHORT)
-                        .show()
+                    Toast.makeText(this, (getString(R.string.MustHaveTitle)), Toast.LENGTH_SHORT).show()
                 } else {
-
-
-
-                    val product =
-                        ProductModel(editTitle.text.toString(), Description.text.toString(), formatted)
+                    val product = ProductModel(editTitle.text.toString(), Description.text.toString(), formatted)
                     product.id = productId
                     productViewModel.productUpdate(product)
                     Toast.makeText(this, (getString(R.string.ProdUpSuc)), Toast.LENGTH_SHORT).show()
                     finish()
                 }
-
-
             }
         } else {
             savebutton.text = getString(R.string.add)
             savebutton.setOnClickListener {
 
                 if (TextUtils.isEmpty(inputText.text.toString())) {
-                    Toast.makeText(this, (getString(R.string.MustHaveTitle)), Toast.LENGTH_SHORT)
-                        .show()
+                    Toast.makeText(this, (getString(R.string.MustHaveTitle)), Toast.LENGTH_SHORT).show()
                 } else {
-                    productViewModel.productInsert(
-                        ProductModel(
-                            editTitle.text.toString(),
-                            Description.text.toString(),
-                            formatted
-
-                        )
-                    )
+                    productViewModel.productInsert(ProductModel(editTitle.text.toString(), Description.text.toString(), formatted))
                     Toast.makeText(this, (getString(R.string.ProdAddSuc)), Toast.LENGTH_SHORT).show()
                     finish()
                 }
-
-
             }
         }
-
-
     }
 }

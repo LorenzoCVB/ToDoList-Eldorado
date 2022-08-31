@@ -67,7 +67,7 @@ class MainActivity : AppCompatActivity(), CountInterface, ClickInterface, Delete
     }
 
     override fun onCount(count: Int) {
-        //nada por enquanto
+        //nada
     }
 
     override fun onClick(productModel: ProductModel) {

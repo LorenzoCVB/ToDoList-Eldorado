@@ -4,25 +4,35 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.eldoradotodolist.R
+import com.example.eldoradotodolist.TodoListApplication
 import com.example.eldoradotodolist.adapter.ClickInterface
 import com.example.eldoradotodolist.adapter.DeleteInterface
 import com.example.eldoradotodolist.adapter.ProductAdapter
+import com.example.eldoradotodolist.databinding.ActivityMainBinding
 import com.example.eldoradotodolist.model.ProductModel
 import com.example.eldoradotodolist.view_model.ProductViewModel
-import kotlinx.android.synthetic.main.activity_main.*
+import com.example.eldoradotodolist.view_model.ProductViewModelFactory
 
 class MainActivity : AppCompatActivity(), ClickInterface, DeleteInterface {
 
-    private lateinit var productViewModel: ProductViewModel
+    private val productViewModel:  ProductViewModel by viewModels {
+        ProductViewModelFactory(
+            (this.applicationContext as TodoListApplication).repository,
+            this.applicationContext as TodoListApplication
+        )
+    }
+
+    private val binding: ActivityMainBinding by lazy {
+        ActivityMainBinding.inflate(layoutInflater)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-
+        setContentView(binding.root)
 
         val loading = LoadingDialog(this)
         loading.startLoading()
@@ -30,12 +40,11 @@ class MainActivity : AppCompatActivity(), ClickInterface, DeleteInterface {
         val handler = Handler()
         handler.postDelayed({ loading.isDismiss() }, 2000)
 
-        recyclerView.layoutManager = LinearLayoutManager(this)
+        binding.recyclerView.layoutManager = LinearLayoutManager(this)
         val productAdapter = ProductAdapter(this, this/*, this*/)
-        recyclerView.adapter = productAdapter
+        binding.recyclerView.adapter = productAdapter
 
 
-        productViewModel = ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory.getInstance(application))[ProductViewModel::class.java]
         productViewModel.getAllProductList.observe(this) { list ->
             list?.let {
                 productAdapter.updateList(it)
@@ -45,7 +54,7 @@ class MainActivity : AppCompatActivity(), ClickInterface, DeleteInterface {
             }
         }
 
-        floatingActionButton.setOnClickListener {
+        binding.floatingActionButton.setOnClickListener {
             val intent = Intent(this, AddEditActivity::class.java)
             startActivity(intent)
         }

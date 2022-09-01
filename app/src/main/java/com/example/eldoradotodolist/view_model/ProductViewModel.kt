@@ -1,24 +1,15 @@
 package com.example.eldoradotodolist.view_model
 
 import android.app.Application
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.viewModelScope
-import com.example.eldoradotodolist.db.ProductDatabase
+import androidx.lifecycle.*
 import com.example.eldoradotodolist.model.ProductModel
 import com.example.eldoradotodolist.repository.ProductRepository
 import kotlinx.coroutines.launch
 
-class ProductViewModel(application: Application): AndroidViewModel(application) {
+class ProductViewModel(private val productRepository: ProductRepository, application: Application) :
+    AndroidViewModel(application) {
 
-    val getAllProductList:LiveData<List<ProductModel>>
-    private val productRepository:ProductRepository
-
-    init {
-        val dao = ProductDatabase.getDatabase(application).getProductDao()
-        productRepository = ProductRepository(dao)
-        getAllProductList = productRepository.getAllProduct
-    }
+    val getAllProductList: LiveData<List<ProductModel>> = productRepository.getAllProduct
 
     fun productInsert(productModel: ProductModel) = viewModelScope.launch {
         productRepository.insert(productModel)
@@ -31,5 +22,17 @@ class ProductViewModel(application: Application): AndroidViewModel(application) 
     fun deleteProduct(productModel: ProductModel) = viewModelScope.launch {
         productRepository.delete(productModel)
     }
+}
 
+class ProductViewModelFactory(
+    private val repository: ProductRepository,
+    private val app: Application
+) : ViewModelProvider.Factory {
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
+        if (modelClass.isAssignableFrom(ProductViewModel::class.java)) {
+            @Suppress("UNCHECKED_CAST")
+            return ProductViewModel(repository, app) as T
+        }
+        throw IllegalArgumentException("Unknown ViewModel class")
+    }
 }
